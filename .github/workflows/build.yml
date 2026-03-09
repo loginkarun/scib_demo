@@ -1,92 +1,40 @@
-name: Maven Build and Test
+name: Build
 
 on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main, develop ]
   workflow_dispatch:
     inputs:
       source_folder:
         description: 'Source folder to build from'
         required: false
         default: 'code'
+        type: string
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
       
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven'
+      
+      - name: Build with Maven
+        run: |
+          cd ${{ github.event.inputs.source_folder || 'code' }}
+          mvn clean verify
         
-    - name: Determine source folder
-      id: source
-      run: |
-        if [ -n "${{ github.event.inputs.source_folder }}" ]; then
-          echo "folder=${{ github.event.inputs.source_folder }}" >> $GITHUB_OUTPUT
-        else
-          echo "folder=code" >> $GITHUB_OUTPUT
-        fi
-        
-    - name: Build with Maven
-      run: |
-        SOURCE_FOLDER="${{ steps.source.outputs.folder }}"
-        if [ -d "$SOURCE_FOLDER" ] && [ -f "$SOURCE_FOLDER/pom.xml" ]; then
-          cd "$SOURCE_FOLDER"
-          mvn clean compile -B -e
-        else
-          echo "Source folder $SOURCE_FOLDER or pom.xml not found"
-          exit 1
-        fi
-        
-    - name: Run tests
-      run: |
-        SOURCE_FOLDER="${{ steps.source.outputs.folder }}"
-        cd "$SOURCE_FOLDER"
-        mvn test -B -e
-        
-    - name: Generate JaCoCo coverage report
-      run: |
-        SOURCE_FOLDER="${{ steps.source.outputs.folder }}"
-        cd "$SOURCE_FOLDER"
-        mvn jacoco:report -B -e
-        
-    - name: Package application
-      run: |
-        SOURCE_FOLDER="${{ steps.source.outputs.folder }}"
-        cd "$SOURCE_FOLDER"
-        mvn package -DskipTests -B -e
-        
-    - name: Verify build
-      run: |
-        SOURCE_FOLDER="${{ steps.source.outputs.folder }}"
-        cd "$SOURCE_FOLDER"
-        mvn verify -B -e
-        
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
-      if: success()
-      with:
-        name: build-artifacts
-        path: |
-          ${{ steps.source.outputs.folder }}/target/*.jar
-          ${{ steps.source.outputs.folder }}/target/site/jacoco/
-        retention-days: 30
-        
-    - name: Upload build logs
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: build-logs
-        path: |
-          ${{ steps.source.outputs.folder }}/target/surefire-reports/
-          ${{ steps.source.outputs.folder }}/target/failsafe-reports/
-        retention-days: 7
+      - name: Upload build logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-logs
+          path: |
+            ${{ github.event.inputs.source_folder || 'code' }}/target/surefire-reports/
+            ${{ github.event.inputs.source_folder || 'code' }}/target/*.jar
+          retention-days: 7

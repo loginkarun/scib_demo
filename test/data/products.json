@@ -1,0 +1,316 @@
+{
+  "testProducts": [
+    {
+      "id": 1,
+      "name": "Laptop Pro 15",
+      "description": "High-performance laptop with 15-inch display",
+      "price": 1299.99,
+      "category": "Electronics",
+      "subcategory": "Computers",
+      "brand": "TechBrand",
+      "sku": "LTP-PRO-15-001",
+      "stock": 50,
+      "weight": 2.1,
+      "dimensions": {
+        "length": 35.0,
+        "width": 24.0,
+        "height": 2.0
+      },
+      "features": [
+        "16GB RAM",
+        "512GB SSD",
+        "Intel i7 Processor",
+        "Dedicated Graphics"
+      ],
+      "active": true,
+      "createdAt": "2024-01-01T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Wireless Headphones",
+      "description": "Premium noise-cancelling wireless headphones",
+      "price": 299.99,
+      "category": "Electronics",
+      "subcategory": "Audio",
+      "brand": "AudioTech",
+      "sku": "WH-NC-001",
+      "stock": 100,
+      "weight": 0.3,
+      "dimensions": {
+        "length": 20.0,
+        "width": 18.0,
+        "height": 8.0
+      },
+      "features": [
+        "Active Noise Cancellation",
+        "30-hour battery life",
+        "Bluetooth 5.0",
+        "Quick charge"
+      ],
+      "active": true,
+      "createdAt": "2024-01-01T11:00:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Smart Watch Series 5",
+      "description": "Advanced fitness tracking smartwatch",
+      "price": 399.99,
+      "category": "Electronics",
+      "subcategory": "Wearables",
+      "brand": "WearTech",
+      "sku": "SW-S5-001",
+      "stock": 75,
+      "weight": 0.05,
+      "dimensions": {
+        "length": 4.4,
+        "width": 3.8,
+        "height": 1.1
+      },
+      "features": [
+        "Heart Rate Monitor",
+        "GPS Tracking",
+        "Water Resistant",
+        "Sleep Tracking"
+      ],
+      "active": true,
+      "createdAt": "2024-01-01T12:00:00Z"
+    },
+    {
+      "id": 4,
+      "name": "Gaming Mouse RGB",
+      "description": "High-precision gaming mouse with RGB lighting",
+      "price": 79.99,
+      "category": "Electronics",
+      "subcategory": "Gaming",
+      "brand": "GameTech",
+      "sku": "GM-RGB-001",
+      "stock": 200,
+      "weight": 0.12,
+      "dimensions": {
+        "length": 12.5,
+        "width": 6.8,
+        "height": 4.2
+      },
+      "features": [
+        "16000 DPI",
+        "RGB Lighting",
+        "Programmable Buttons",
+        "Ergonomic Design"
+      ],
+      "active": true,
+      "createdAt": "2024-01-01T13:00:00Z"
+    },
+    {
+      "id": 5,
+      "name": "Discontinued Product",
+      "description": "This product is no longer available",
+      "price": 199.99,
+      "category": "Electronics",
+      "subcategory": "Misc",
+      "brand": "OldTech",
+      "sku": "DISC-001",
+      "stock": 0,
+      "weight": 1.0,
+      "dimensions": {
+        "length": 10.0,
+        "width": 10.0,
+        "height": 5.0
+      },
+      "features": [
+        "Legacy Support"
+      ],
+      "active": false,
+      "createdAt": "2023-01-01T10:00:00Z"
+    }
+  ],
+  "invalidProducts": [
+    {
+      "name": "Product with Negative Price",
+      "description": "This product has invalid pricing",
+      "price": -50.00,
+      "category": "Electronics",
+      "stock": 10
+    },
+    {
+      "description": "Product without name",
+      "price": 100.00,
+      "category": "Electronics",
+      "stock": 10
+    },
+    {
+      "name": "Product without price",
+      "description": "This product has no price",
+      "category": "Electronics",
+      "stock": 10
+    },
+    {
+      "name": "Product with Invalid Category",
+      "description": "This product has invalid category",
+      "price": 100.00,
+      "category": "",
+      "stock": 10
+    },
+    {
+      "name": "Product with Negative Stock",
+      "description": "This product has negative stock",
+      "price": 100.00,
+      "category": "Electronics",
+      "stock": -5
+    }
+  ],
+  "productUpdates": [
+    {
+      "name": "Laptop Pro 15 Updated",
+      "description": "Updated high-performance laptop with 15-inch display",
+      "price": 1199.99,
+      "stock": 45
+    },
+    {
+      "price": 279.99,
+      "stock": 120
+    },
+    {
+      "description": "Advanced fitness tracking smartwatch with new features",
+      "features": [
+        "Heart Rate Monitor",
+        "GPS Tracking",
+        "Water Resistant",
+        "Sleep Tracking",
+        "Blood Oxygen Monitor"
+      ]
+    }
+  ],
+  "bulkProducts": [
+    {
+      "name": "Bulk Product 1",
+      "description": "Bulk test product 1",
+      "price": 19.99,
+      "category": "Test",
+      "stock": 100
+    },
+    {
+      "name": "Bulk Product 2",
+      "description": "Bulk test product 2",
+      "price": 29.99,
+      "category": "Test",
+      "stock": 100
+    },
+    {
+      "name": "Bulk Product 3",
+      "description": "Bulk test product 3",
+      "price": 39.99,
+      "category": "Test",
+      "stock": 100
+    },
+    {
+      "name": "Bulk Product 4",
+      "description": "Bulk test product 4",
+      "price": 49.99,
+      "category": "Test",
+      "stock": 100
+    },
+    {
+      "name": "Bulk Product 5",
+      "description": "Bulk test product 5",
+      "price": 59.99,
+      "category": "Test",
+      "stock": 100
+    }
+  ],
+  "performanceTestProducts": [
+    {
+      "name": "Perf Product {{$randomInt}}",
+      "description": "Performance test product {{$randomInt}}",
+      "price": "{{$randomPrice}}",
+      "category": "Performance",
+      "stock": "{{$randomInt}}"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Electronics",
+      "subcategories": [
+        "Computers",
+        "Audio",
+        "Wearables",
+        "Gaming",
+        "Mobile",
+        "Accessories"
+      ]
+    },
+    {
+      "name": "Clothing",
+      "subcategories": [
+        "Men",
+        "Women",
+        "Kids",
+        "Accessories"
+      ]
+    },
+    {
+      "name": "Home & Garden",
+      "subcategories": [
+        "Furniture",
+        "Decor",
+        "Kitchen",
+        "Garden"
+      ]
+    },
+    {
+      "name": "Sports",
+      "subcategories": [
+        "Fitness",
+        "Outdoor",
+        "Team Sports",
+        "Water Sports"
+      ]
+    }
+  ],
+  "searchTestData": {
+    "validSearchTerms": [
+      "laptop",
+      "headphones",
+      "watch",
+      "mouse",
+      "gaming",
+      "wireless",
+      "smart",
+      "pro"
+    ],
+    "invalidSearchTerms": [
+      "",
+      "   ",
+      "nonexistentproduct",
+      "12345",
+      "!@#$%"
+    ],
+    "specialCharacterSearchTerms": [
+      "laptop+mouse",
+      "price>100",
+      "category:electronics",
+      "brand=TechBrand"
+    ]
+  },
+  "priceRanges": [
+    {
+      "min": 0,
+      "max": 50,
+      "description": "Budget range"
+    },
+    {
+      "min": 50,
+      "max": 200,
+      "description": "Mid range"
+    },
+    {
+      "min": 200,
+      "max": 500,
+      "description": "Premium range"
+    },
+    {
+      "min": 500,
+      "max": 2000,
+      "description": "Luxury range"
+    }
+  ]
+}

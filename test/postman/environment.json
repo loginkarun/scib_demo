@@ -1,0 +1,129 @@
+{
+  "id": "12345678-1234-1234-1234-123456789012",
+  "name": "SpringBoot API Test Environment",
+  "values": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "description": "Base URL for the SpringBoot API",
+      "enabled": true
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "description": "JWT authentication token (populated by login request)",
+      "enabled": true
+    },
+    {
+      "key": "user_id",
+      "value": "",
+      "description": "User ID for testing (populated by create user request)",
+      "enabled": true
+    },
+    {
+      "key": "product_id",
+      "value": "",
+      "description": "Product ID for testing (populated by create product request)",
+      "enabled": true
+    },
+    {
+      "key": "order_id",
+      "value": "",
+      "description": "Order ID for testing (populated by create order request)",
+      "enabled": true
+    },
+    {
+      "key": "test_username",
+      "value": "testuser@example.com",
+      "description": "Test username for authentication",
+      "enabled": true
+    },
+    {
+      "key": "test_password",
+      "value": "SecurePass123!",
+      "description": "Test password for authentication",
+      "enabled": true
+    },
+    {
+      "key": "admin_username",
+      "value": "admin@example.com",
+      "description": "Admin username for privileged operations",
+      "enabled": true
+    },
+    {
+      "key": "admin_password",
+      "value": "AdminPass123!",
+      "description": "Admin password for privileged operations",
+      "enabled": true
+    },
+    {
+      "key": "api_version",
+      "value": "v1",
+      "description": "API version for versioned endpoints",
+      "enabled": true
+    },
+    {
+      "key": "content_type",
+      "value": "application/json",
+      "description": "Default content type for requests",
+      "enabled": true
+    },
+    {
+      "key": "timeout",
+      "value": "5000",
+      "description": "Request timeout in milliseconds",
+      "enabled": true
+    },
+    {
+      "key": "page_size",
+      "value": "10",
+      "description": "Default page size for paginated requests",
+      "enabled": true
+    },
+    {
+      "key": "test_email",
+      "value": "test.user@example.com",
+      "description": "Test email for user creation",
+      "enabled": true
+    },
+    {
+      "key": "invalid_email",
+      "value": "invalid-email-format",
+      "description": "Invalid email for negative testing",
+      "enabled": true
+    },
+    {
+      "key": "test_phone",
+      "value": "+1234567890",
+      "description": "Test phone number",
+      "enabled": true
+    },
+    {
+      "key": "product_name",
+      "value": "Test Product",
+      "description": "Test product name",
+      "enabled": true
+    },
+    {
+      "key": "product_price",
+      "value": "29.99",
+      "description": "Test product price",
+      "enabled": true
+    },
+    {
+      "key": "product_category",
+      "value": "Electronics",
+      "description": "Test product category",
+      "enabled": true
+    },
+    {
+      "key": "stock_quantity",
+      "value": "100",
+      "description": "Test stock quantity",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2024-01-15T10:00:00.000Z",
+  "_postman_exported_using": "Postman/10.0.0"
+}

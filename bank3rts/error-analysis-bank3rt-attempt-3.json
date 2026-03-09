@@ -1,35 +1,46 @@
 {
-  "executive_summary": "Build workflow execution failed due to missing GitHub Actions workflow file. The workflow dispatch endpoint returned HTTP 404, indicating that the .github/workflows/build.yml file does not exist in the repository or is not accessible. This is a critical configuration error that prevents any build automation from executing.",
+  "executive_summary": "Build workflow execution failed due to GitHub Actions workflow file not found (HTTP 404). The workflow dispatch endpoint returned 404 error, indicating the .github/workflows/build.yml file is either missing, inaccessible, or GitHub Actions is disabled for this repository. This is a critical configuration error preventing any build execution.",
   "errors": [
     {
       "error_id": "ERR-001",
       "category": "CONFIGURATION_ERROR",
       "severity": "CRITICAL",
       "title": "GitHub Actions Workflow File Not Found",
-      "description": "The GitHub Actions workflow dispatch API returned HTTP 404 Not Found when attempting to trigger the build.yml workflow. This indicates that the workflow file .github/workflows/build.yml does not exist in the repository at the specified branch, or GitHub Actions is disabled for this repository.",
+      "description": "The GitHub Actions workflow dispatch endpoint returned HTTP 404 Not Found error when attempting to trigger the build.yml workflow. This indicates the workflow file does not exist at the expected path or is not accessible.",
       "error_message": "HTTP Error 404: Not Found. Workflow dispatch endpoint returned 404. Possible causes: token missing workflow/actions permissions, workflow not accessible on this repo/branch, or Actions disabled. dispatch_url=https://api.github.com/repos/loginkarun/scib_demo/actions/workflows/.github%2Fworkflows%2Fbuild.yml/dispatches response_body={\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"404\"}",
       "location": ".github/workflows/build.yml",
-      "root_cause": "The workflow file .github/workflows/build.yml is missing from the repository structure. The GitHub Actions workflow dispatch API cannot find the specified workflow file to execute.",
-      "impact": "Complete build automation failure. No builds can be triggered or executed until the workflow file is created and properly configured. This blocks all CI/CD operations including compilation, testing, and deployment."
+      "root_cause": "The workflow file .github/workflows/build.yml does not exist in the repository at the specified branch (main), or GitHub Actions is disabled/not configured for this repository. The GitHub API returned 404 indicating the resource cannot be found.",
+      "impact": "Complete build pipeline failure. No builds can be executed until the workflow file is created or the configuration issue is resolved. This blocks all CI/CD automation and prevents code validation, testing, and deployment."
     },
     {
       "error_id": "ERR-002",
       "category": "CONFIGURATION_ERROR",
       "severity": "HIGH",
       "title": "Missing GitHub Actions Workflow Configuration",
-      "description": "The repository lacks the required .github/workflows directory structure and build.yml workflow definition. This prevents automated build execution through GitHub Actions.",
+      "description": "The repository lacks the required GitHub Actions workflow configuration file that defines the build process. Without this file, automated builds cannot be triggered.",
       "error_message": "Workflow file not found - Final attempt failure",
-      "location": ".github/workflows/",
-      "root_cause": "The .github/workflows directory may not exist, or the build.yml file has not been created within it. GitHub Actions requires this specific directory structure to discover and execute workflows.",
-      "impact": "No automated CI/CD pipeline available. Manual intervention required to create workflow configuration before any automated builds can proceed."
+      "location": ".github/workflows/ directory",
+      "root_cause": "The .github/workflows directory may not exist, or the build.yml file has not been created in this repository. This is a prerequisite for GitHub Actions automation.",
+      "impact": "Prevents automated CI/CD pipeline execution. Manual intervention required to create and configure the workflow file before any builds can proceed."
+    },
+    {
+      "error_id": "ERR-003",
+      "category": "CONFIGURATION_ERROR",
+      "severity": "HIGH",
+      "title": "GitHub Actions API Authentication or Permissions Issue",
+      "description": "The 404 error could also indicate insufficient permissions on the GitHub token being used to dispatch workflows, or GitHub Actions may be disabled for this repository.",
+      "error_message": "Possible causes: token missing workflow/actions permissions, workflow not accessible on this repo/branch, or Actions disabled",
+      "location": "GitHub API authentication/permissions",
+      "root_cause": "The GitHub personal access token may lack the required 'workflow' or 'actions' scopes, or the repository settings may have GitHub Actions disabled.",
+      "impact": "Even if the workflow file exists, builds cannot be triggered without proper API permissions. This requires token regeneration with correct scopes or enabling GitHub Actions in repository settings."
     }
   ],
   "summary": {
-    "total_errors": 2,
+    "total_errors": 3,
     "critical_errors": 1,
-    "high_errors": 1,
+    "high_errors": 2,
     "error_categories": {
-      "CONFIGURATION_ERROR": 2
+      "CONFIGURATION_ERROR": 3
     }
   },
   "attempt_number": 3,
@@ -37,43 +48,36 @@
   "repository": "loginkarun/scib_demo",
   "branch": "main",
   "analysis_timestamp": "2025-01-23T10:30:00Z",
-  "recommended_fixes": [
+  "recommended_actions": [
     {
-      "fix_id": "FIX-001",
-      "error_id": "ERR-001",
-      "priority": "CRITICAL",
+      "priority": "IMMEDIATE",
       "action": "Create GitHub Actions workflow file",
-      "description": "Create the .github/workflows/build.yml file with proper Maven build configuration",
-      "automated_fix_available": true,
-      "fix_steps": [
-        "Create .github/workflows directory if it doesn't exist",
-        "Create build.yml file with Maven build job definition",
-        "Configure workflow triggers (push, pull_request, workflow_dispatch)",
-        "Define build steps: checkout, setup-java, maven build, test execution",
-        "Commit and push the workflow file to the repository"
-      ],
-      "estimated_fix_time": "5-10 minutes"
+      "description": "Create .github/workflows/build.yml file in the repository with proper Maven build configuration",
+      "automation_available": true
     },
     {
-      "fix_id": "FIX-002",
-      "error_id": "ERR-002",
-      "priority": "HIGH",
+      "priority": "IMMEDIATE",
       "action": "Verify GitHub Actions is enabled",
-      "description": "Ensure GitHub Actions is enabled for the repository and the access token has proper permissions",
-      "automated_fix_available": false,
-      "fix_steps": [
-        "Navigate to repository Settings > Actions > General",
-        "Verify Actions permissions are set to 'Allow all actions'",
-        "Check that workflow permissions allow read and write access",
-        "Verify the GitHub token has 'workflow' scope enabled"
-      ],
-      "estimated_fix_time": "2-5 minutes"
+      "description": "Check repository settings to ensure GitHub Actions is enabled and not restricted",
+      "automation_available": false
+    },
+    {
+      "priority": "HIGH",
+      "action": "Verify GitHub token permissions",
+      "description": "Ensure the GitHub personal access token has 'workflow' and 'actions' scopes enabled",
+      "automation_available": false
+    },
+    {
+      "priority": "HIGH",
+      "action": "Create .github/workflows directory structure",
+      "description": "Ensure the .github/workflows directory exists in the repository root",
+      "automation_available": true
     }
   ],
   "compliance_notes": {
-    "audit_trail": "Build failure detected at attempt 3. No workflow execution occurred due to missing workflow file. Error classification completed and documented.",
-    "remediation_required": true,
-    "blocking_issue": true,
-    "next_steps": "Create .github/workflows/build.yml file with Maven build configuration before attempting next build."
+    "audit_trail": "Build failure detected at attempt 3. No Maven build logs available due to workflow configuration failure. Error classification performed based on GitHub API response.",
+    "remediation_status": "PENDING_MANUAL_INTERVENTION",
+    "requires_approval": true,
+    "approval_reason": "Workflow file creation requires repository write access and architectural review"
   }
 }

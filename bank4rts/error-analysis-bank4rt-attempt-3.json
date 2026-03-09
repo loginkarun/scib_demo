@@ -1,0 +1,113 @@
+{
+  "executive_summary": "Build workflow execution failed due to missing or inaccessible GitHub Actions workflow file. The workflow dispatch endpoint returned HTTP 404, indicating that the .github/workflows/build.yml file is either not present in the repository, not accessible with current permissions, or GitHub Actions is disabled for this repository.",
+  "errors": [
+    {
+      "error_id": "ERR-001",
+      "category": "CONFIGURATION_ERROR",
+      "severity": "CRITICAL",
+      "title": "GitHub Actions Workflow File Not Found",
+      "description": "The workflow dispatch API endpoint returned HTTP 404 when attempting to trigger the build.yml workflow. This indicates a fundamental configuration issue preventing any build execution.",
+      "error_message": "HTTP Error 404: Not Found. Workflow dispatch endpoint returned 404. Possible causes: token missing workflow/actions permissions, workflow not accessible on this repo/branch, or Actions disabled. dispatch_url=https://api.github.com/repos/loginkarun/scib_demo/actions/workflows/.github%2Fworkflows%2Fbuild.yml/dispatches response_body={"message":"Not Found","documentation_url":"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event","status":"404"}",
+      "location": ".github/workflows/build.yml",
+      "root_cause": "The workflow file .github/workflows/build.yml does not exist in the repository at the specified branch (main), or the GitHub token lacks sufficient permissions to access/trigger workflows, or GitHub Actions is disabled for this repository.",
+      "impact": "Complete build pipeline failure. No builds can be executed until the workflow file is created or permissions are corrected. This blocks all CI/CD automation including compilation, testing, and deployment."
+    },
+    {
+      "error_id": "ERR-002",
+      "category": "CONFIGURATION_ERROR",
+      "severity": "HIGH",
+      "title": "Missing Workflow File Path",
+      "description": "The expected workflow file path .github/workflows/build.yml is not present in the repository structure.",
+      "error_message": "Workflow file not found - Final attempt failure",
+      "location": ".github/workflows/build.yml",
+      "root_cause": "The .github/workflows directory may not exist, or the build.yml file was never created, or it was deleted/moved without updating references.",
+      "impact": "Prevents automated build triggers. Manual intervention required to create or restore the workflow file."
+    },
+    {
+      "error_id": "ERR-003",
+      "category": "CONFIGURATION_ERROR",
+      "severity": "HIGH",
+      "title": "GitHub Actions API Authentication/Permission Issue",
+      "description": "The GitHub token may lack the required 'workflow' or 'actions' permissions to dispatch workflow events.",
+      "error_message": "token missing workflow/actions permissions",
+      "location": "GitHub API Authentication",
+      "root_cause": "The personal access token (PAT) or GitHub App token used for API calls may not have the 'workflow' scope enabled, which is required to trigger workflow_dispatch events.",
+      "impact": "Even if the workflow file exists, builds cannot be triggered programmatically. Requires token regeneration with proper scopes."
+    }
+  ],
+  "summary": {
+    "total_errors": 3,
+    "critical_errors": 1,
+    "high_errors": 2,
+    "error_categories": {
+      "CONFIGURATION_ERROR": 3
+    }
+  },
+  "attempt_number": 3,
+  "action_url": "",
+  "repository": "loginkarun/scib_demo",
+  "branch": "main",
+  "analysis_timestamp": "2025-01-10T00:00:00Z",
+  "recommended_fixes": [
+    {
+      "fix_id": "FIX-001",
+      "error_id": "ERR-001",
+      "priority": "CRITICAL",
+      "action": "Create GitHub Actions Workflow File",
+      "steps": [
+        "1. Create directory structure: mkdir -p .github/workflows",
+        "2. Create build.yml file with Maven build configuration",
+        "3. Include workflow_dispatch trigger to enable manual/API triggering",
+        "4. Commit and push to main branch",
+        "5. Verify workflow appears in Actions tab"
+      ],
+      "automation_script": "create_workflow_file.sh",
+      "estimated_time": "5 minutes",
+      "risk_level": "LOW"
+    },
+    {
+      "fix_id": "FIX-002",
+      "error_id": "ERR-003",
+      "priority": "HIGH",
+      "action": "Update GitHub Token Permissions",
+      "steps": [
+        "1. Navigate to GitHub Settings > Developer settings > Personal access tokens",
+        "2. Generate new token or edit existing token",
+        "3. Enable 'workflow' scope (required for workflow_dispatch)",
+        "4. Enable 'repo' scope (required for repository access)",
+        "5. Update token in environment variables/secrets",
+        "6. Retry workflow dispatch"
+      ],
+      "automation_script": "N/A - Manual token regeneration required",
+      "estimated_time": "10 minutes",
+      "risk_level": "LOW"
+    },
+    {
+      "fix_id": "FIX-003",
+      "error_id": "ERR-001",
+      "priority": "MEDIUM",
+      "action": "Verify GitHub Actions Enabled",
+      "steps": [
+        "1. Navigate to repository Settings > Actions > General",
+        "2. Ensure 'Allow all actions and reusable workflows' is selected",
+        "3. Check that Actions are not disabled at organization level",
+        "4. Verify repository is not archived"
+      ],
+      "automation_script": "N/A - Manual verification required",
+      "estimated_time": "5 minutes",
+      "risk_level": "LOW"
+    }
+  ],
+  "compliance_notes": {
+    "audit_trail": "All workflow dispatch attempts logged with HTTP 404 responses. No successful builds executed.",
+    "security_impact": "No security vulnerabilities introduced. Configuration issue only.",
+    "rollback_plan": "N/A - No changes to rollback. Issue is missing configuration."
+  },
+  "next_steps": [
+    "1. IMMEDIATE: Create .github/workflows/build.yml file with proper Maven build configuration",
+    "2. IMMEDIATE: Verify GitHub token has 'workflow' scope enabled",
+    "3. Verify GitHub Actions is enabled for the repository",
+    "4. Test workflow dispatch manually from Actions tab",
+    "5. Retry automated build trigger after fixes applied"
+  ]
+}

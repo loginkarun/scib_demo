@@ -1,0 +1,158 @@
+{
+  "testUsers": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "password": "SecurePass123!",
+      "phone": "+1234567890",
+      "role": "USER",
+      "active": true,
+      "createdAt": "2024-01-01T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "password": "SecurePass456!",
+      "phone": "+1234567891",
+      "role": "USER",
+      "active": true,
+      "createdAt": "2024-01-01T11:00:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "password": "AdminPass123!",
+      "phone": "+1234567892",
+      "role": "ADMIN",
+      "active": true,
+      "createdAt": "2024-01-01T09:00:00Z"
+    },
+    {
+      "id": 4,
+      "name": "Test Manager",
+      "email": "manager@example.com",
+      "password": "ManagerPass123!",
+      "phone": "+1234567893",
+      "role": "MANAGER",
+      "active": true,
+      "createdAt": "2024-01-01T12:00:00Z"
+    },
+    {
+      "id": 5,
+      "name": "Inactive User",
+      "email": "inactive@example.com",
+      "password": "InactivePass123!",
+      "phone": "+1234567894",
+      "role": "USER",
+      "active": false,
+      "createdAt": "2024-01-01T13:00:00Z"
+    }
+  ],
+  "invalidUsers": [
+    {
+      "name": "Invalid Email User",
+      "email": "invalid-email-format",
+      "password": "SecurePass123!",
+      "phone": "+1234567895"
+    },
+    {
+      "name": "Missing Email User",
+      "password": "SecurePass123!",
+      "phone": "+1234567896"
+    },
+    {
+      "name": "Weak Password User",
+      "email": "weak@example.com",
+      "password": "123",
+      "phone": "+1234567897"
+    },
+    {
+      "email": "missing.name@example.com",
+      "password": "SecurePass123!",
+      "phone": "+1234567898"
+    },
+    {
+      "name": "Invalid Phone User",
+      "email": "invalid.phone@example.com",
+      "password": "SecurePass123!",
+      "phone": "invalid-phone"
+    }
+  ],
+  "userUpdates": [
+    {
+      "name": "John Doe Updated",
+      "email": "john.doe.updated@example.com",
+      "phone": "+1234567800"
+    },
+    {
+      "name": "Jane Smith Modified",
+      "phone": "+1234567801"
+    },
+    {
+      "email": "jane.new.email@example.com"
+    }
+  ],
+  "bulkUsers": [
+    {
+      "name": "Bulk User 1",
+      "email": "bulk1@example.com",
+      "password": "BulkPass123!",
+      "phone": "+1234567901"
+    },
+    {
+      "name": "Bulk User 2",
+      "email": "bulk2@example.com",
+      "password": "BulkPass123!",
+      "phone": "+1234567902"
+    },
+    {
+      "name": "Bulk User 3",
+      "email": "bulk3@example.com",
+      "password": "BulkPass123!",
+      "phone": "+1234567903"
+    },
+    {
+      "name": "Bulk User 4",
+      "email": "bulk4@example.com",
+      "password": "BulkPass123!",
+      "phone": "+1234567904"
+    },
+    {
+      "name": "Bulk User 5",
+      "email": "bulk5@example.com",
+      "password": "BulkPass123!",
+      "phone": "+1234567905"
+    }
+  ],
+  "performanceTestUsers": [
+    {
+      "name": "Perf User {{$randomInt}}",
+      "email": "perf{{$randomInt}}@example.com",
+      "password": "PerfPass123!",
+      "phone": "+123456{{$randomInt}}"
+    }
+  ],
+  "specialCharacterUsers": [
+    {
+      "name": "José María González",
+      "email": "jose.maria@example.com",
+      "password": "SpecialPass123!",
+      "phone": "+34123456789"
+    },
+    {
+      "name": "李小明",
+      "email": "xiaoming@example.com",
+      "password": "ChinesePass123!",
+      "phone": "+86123456789"
+    },
+    {
+      "name": "Müller Schmidt",
+      "email": "muller@example.com",
+      "password": "GermanPass123!",
+      "phone": "+49123456789"
+    }
+  ]
+}

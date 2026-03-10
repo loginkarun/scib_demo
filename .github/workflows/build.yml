@@ -1,20 +1,27 @@
-name: Build
+name: Maven Build and Test
 
 on:
   workflow_dispatch:
     inputs:
       source_folder:
-        description: 'Source folder to build from'
+        description: 'Source folder containing Maven project'
         required: false
         default: 'code'
-        type: string
+  push:
+    branches: [ main ]
+    paths:
+      - 'code/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'code/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
       
       - name: Set up JDK 11
@@ -24,17 +31,45 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       
+      - name: Display Maven version
+        run: mvn --version
+      
       - name: Build with Maven
-        run: |
-          cd ${{ github.event.inputs.source_folder || 'code' }}
-          mvn clean verify
-        
-      - name: Upload build logs
-        if: always()
+        working-directory: ${{ github.event.inputs.source_folder || 'code' }}
+        run: mvn clean install -DskipTests
+      
+      - name: Run tests
+        working-directory: ${{ github.event.inputs.source_folder || 'code' }}
+        run: mvn test
+      
+      - name: Verify and generate coverage report
+        working-directory: ${{ github.event.inputs.source_folder || 'code' }}
+        run: mvn verify
+      
+      - name: Upload JaCoCo coverage report
         uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: jacoco-report
+          path: ${{ github.event.inputs.source_folder || 'code' }}/target/site/jacoco/
+          retention-days: 30
+      
+      - name: Upload build logs
+        uses: actions/upload-artifact@v3
+        if: always()
         with:
           name: build-logs
-          path: |
-            ${{ github.event.inputs.source_folder || 'code' }}/target/surefire-reports/
-            ${{ github.event.inputs.source_folder || 'code' }}/target/*.jar
-          retention-days: 7
+          path: ${{ github.event.inputs.source_folder || 'code' }}/target/surefire-reports/
+          retention-days: 30
+      
+      - name: Build summary
+        if: always()
+        run: |
+          echo "### Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Repository:** ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Source Folder:** ${{ github.event.inputs.source_folder || 'code' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Java Version:** 11" >> $GITHUB_STEP_SUMMARY
+          echo "- **Build Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY

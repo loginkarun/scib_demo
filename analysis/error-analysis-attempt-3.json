@@ -1,5 +1,5 @@
 {
-  "executive_summary": "Build workflow failed due to missing or inaccessible GitHub Actions workflow file. The workflow dispatch endpoint returned 404, indicating the workflow configuration is not properly set up in the repository. This requires adding the workflow YAML file to .github/workflows/ directory.",
+  "executive_summary": "Build workflow execution failed due to missing or inaccessible GitHub Actions workflow file. The workflow dispatch endpoint returned a 404 error, indicating that the .github/workflows/build.yml file does not exist, is not accessible with current permissions, or GitHub Actions is disabled for this repository.",
   "attempt_number": 3,
   "repo": "scib_demo",
   "branch": "main",
@@ -10,9 +10,9 @@
       "type": "CONFIGURATION_ERROR",
       "file": ".github/workflows/build.yml",
       "line": null,
-      "message": "Workflow file not found - HTTP 404 on workflow dispatch endpoint",
-      "root_cause": "The GitHub Actions workflow file (.github/workflows/build.yml) does not exist in the repository or the GitHub token lacks workflow/actions permissions. The workflow dispatch API endpoint returned 404 Not Found.",
-      "fix_recommendation": "Create .github/workflows/build.yml with proper Maven build configuration, or verify that the workflow file exists and the GitHub token has 'workflow' and 'actions:write' permissions enabled."
+      "message": "Workflow file not found - HTTP 404 from workflow dispatch endpoint",
+      "root_cause": "The GitHub Actions workflow file at .github/workflows/build.yml does not exist in the repository, or the authentication token lacks workflow/actions permissions, or GitHub Actions is disabled for this repository.",
+      "fix_recommendation": "Create the missing .github/workflows/build.yml file with proper Maven build configuration, or verify that GitHub Actions is enabled for the repository, or ensure the authentication token has 'workflow' and 'actions:write' permissions."
     }
   ],
   "summary": "1 error found"

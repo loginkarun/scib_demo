@@ -1,0 +1,30 @@
+﻿2026-05-07T07:47:50.3580845Z Current runner version: '2.334.0'
+2026-05-07T07:47:50.3615217Z ##[group]Runner Image Provisioner
+2026-05-07T07:47:50.3616475Z Hosted Compute Agent
+2026-05-07T07:47:50.3617549Z Version: 20260213.493
+2026-05-07T07:47:50.3618509Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+2026-05-07T07:47:50.3619790Z Build Date: 2026-02-13T00:28:41Z
+2026-05-07T07:47:50.3620960Z Worker ID: {13b40333-07f3-4100-bd1c-475730cb4207}
+2026-05-07T07:47:50.3622157Z Azure Region: eastus2
+2026-05-07T07:47:50.3623477Z ##[endgroup]
+2026-05-07T07:47:50.3626129Z ##[group]Operating System
+2026-05-07T07:47:50.3627103Z Ubuntu
+2026-05-07T07:47:50.3627843Z 24.04.4
+2026-05-07T07:47:50.3628799Z LTS
+2026-05-07T07:47:50.3629568Z ##[endgroup]
+2026-05-07T07:47:50.3630444Z ##[group]Runner Image
+2026-05-07T07:47:50.3631546Z Image: ubuntu-24.04
+2026-05-07T07:47:50.3632460Z Version: 20260413.86.1
+2026-05-07T07:47:50.3634964Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260413.86/images/ubuntu/Ubuntu2404-Readme.md
+2026-05-07T07:47:50.3637551Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260413.86
+2026-05-07T07:47:50.3639307Z ##[endgroup]
+2026-05-07T07:47:50.3641406Z ##[group]GITHUB_TOKEN Permissions
+2026-05-07T07:47:50.3644540Z Contents: read
+2026-05-07T07:47:50.3645585Z Metadata: read
+2026-05-07T07:47:50.3646384Z Packages: read
+2026-05-07T07:47:50.3647209Z ##[endgroup]
+2026-05-07T07:47:50.3649995Z Secret source: Actions
+2026-05-07T07:47:50.3651316Z Prepare workflow directory
+2026-05-07T07:47:50.4117490Z Prepare all required actions
+2026-05-07T07:47:50.4171976Z Getting action download info
+2026-05-07T07:47:50.7538785Z ##[error]This request has been automatically failed because it uses a deprecated version of `actions/upload-artifact: v3`. Learn more: https://github.blog/changelog/2024-04-16-deprecation-notice-v3-of-the-artifact-actions/
